@@ -5,7 +5,7 @@ class TestController {
 		def query = sqlBuilderService.users {
 			like "name", "M%"
 		}
-		render "query=${query.toSql()}; params=${query.parameters}"
+		render "query=${query.sql}; params=${query.parameters}"
 	}
 
     def usersEachRow = { 
@@ -24,7 +24,7 @@ class TestController {
 			maxResults 100
 			order "c", "desc"
 		}
-		render "query=${query.toSql()}; params=${query.parameters}"
+		render "query=${query.sql}; params=${query.parameters}"
 	}
 	
 	def usersByCityEachRow = {
@@ -43,7 +43,7 @@ class TestController {
 		def query = sqlBuilderService.usersPlusCity {
 			like 'city', 'C%'
 		}
-		def s = "query=${query.toSql()}; params=${query.parameters}\n"
+		def s = "query=${query.sql}; params=${query.parameters}\n"
 		sqlBuilderService.eachRow(query){
 			s += "${it}\n"
 		}
